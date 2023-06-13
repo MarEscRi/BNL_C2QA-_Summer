@@ -14,7 +14,8 @@ if typing.TYPE_CHECKING:
 
 
 def plot(ax: Axes) -> None:
-    theta: NDArray[np.float_] = np.linspace(0, 20 * np.pi, 2000)  # poloidal angle
+    # poloidal angle
+    theta: NDArray[np.float_] = np.linspace(0, 20 * np.pi, 2000)
 
     x: NDArray[np.float_] = theta * np.cos(theta)
     y: NDArray[np.float_] = theta * np.sin(theta)
