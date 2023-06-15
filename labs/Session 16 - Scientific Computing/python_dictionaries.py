@@ -1,10 +1,11 @@
-# python_dictionaries.py
+#!/usr/bin/env python3
+"""python_dictionaries.py"""
 
 from pprint import pprint
 
 
-def main():
-    capitals = {
+def main() -> None:
+    capitals: dict[str, str] = {
         "USA": "Washington D.C.",
         "Germany": "Berlin",
         "France": "Paris",
@@ -32,8 +33,9 @@ def main():
 
     # Get the value of a specific key
     country = "France"
-    capital = capitals[country]
+    capital: str = capitals[country]
     print(f"The Capital of {country} is {capital}")
 
 
-main()
+if __name__ == "__main__":
+    main()

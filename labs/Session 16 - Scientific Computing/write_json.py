@@ -1,10 +1,18 @@
-# write_json.py
+#!/usr/bin/env python3
+"""write_json.py"""
+
+from __future__ import annotations
 
 import json
+import typing
+from pathlib import Path
+
+if typing.TYPE_CHECKING:
+    from typing import Any
 
 
-def main():
-    uranium_isotopes = {
+def main() -> None:
+    uranium_isotopes: dict[Any, Any] = {
         "Uranium 233": {
             "atomic_mass": "233.03963 u",
             "neutrons": 141,
@@ -37,8 +45,10 @@ def main():
         },
     }
 
-    with open("uranium_isotopes.json", "w", encoding="ascii") as outfile:
+    with open(Path(__file__).parent.joinpath("uranium_isotopes.json"), "w",
+               encoding="ascii") as outfile:
         json.dump(uranium_isotopes, outfile, indent=4)
 
 
-main()
+if __name__ == "__main__":
+    main()

@@ -1,20 +1,31 @@
-# read_json.py
+#!/usr/bin/env python3
+"""read_json.py"""
+
+from __future__ import annotations
 
 import json
+import typing
+from pathlib import Path
+
+if typing.TYPE_CHECKING:
+    from typing import Any
 
 
-def main():
+def main() -> None:
     # Create a Python dictionary from the JSON file
-    with open("uranium_isotopes.json", "r", encoding="ascii") as infile:
-        uranium_isotopes = json.load(infile)
+    with open(
+        Path(__file__).parent.joinpath("uranium_isotopes.json"), "r", encoding="ascii"
+    ) as infile:
+        uranium_isotopes: dict[Any, Any] = json.load(infile)
 
     # Find the two isotopes with the maximum difference in half-life
-    max_diff = 0.0
+    iso_pair: tuple[str, str] = ("", "")
+    max_diff: float = 0.0
     for k1, v1 in uranium_isotopes.items():
         for k2, v2 in uranium_isotopes.items():
             h1 = float(v1["half-life"])
             h2 = float(v2["half-life"])
-            diff = abs(h1 - h2)
+            diff: float = abs(h1 - h2)
             if diff > max_diff:
                 iso_pair = (k1, k2)
                 max_diff = diff
@@ -23,16 +34,21 @@ def main():
     max_diff /= 60 * 60 * 24 * 365.25
 
     # Determine difference in neutrons between the two isotopes
+    iso1: str
+    iso2: str
     iso1, iso2 = iso_pair[0], iso_pair[1]
-    neutrons1 = uranium_isotopes[iso1]["neutrons"]
-    neutrons2 = uranium_isotopes[iso2]["neutrons"]
-    neutron_delta = abs(neutrons1 - neutrons2)
+    neutrons1: int = uranium_isotopes[iso1]["neutrons"]
+    neutrons2: int = uranium_isotopes[iso2]["neutrons"]
+    neutron_delta: int = abs(neutrons1 - neutrons2)
 
     print(
-        f"{iso1} and {iso2}:\n"
-        f"Half-life difference: {max_diff:,.0f} years\n"
-        f"Neutron difference:   {neutron_delta}"
+        (
+            f"{iso1} and {iso2}:\n"
+            f"Half-life difference: {max_diff:,.0f} years\n"
+            f"Neutron difference:   {neutron_delta}"
+        )
     )
 
 
-main()
+if __name__ == "__main__":
+    main()
