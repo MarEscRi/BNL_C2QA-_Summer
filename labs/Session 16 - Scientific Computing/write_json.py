@@ -4,15 +4,11 @@
 from __future__ import annotations
 
 import json
-import typing
 from pathlib import Path
-
-if typing.TYPE_CHECKING:
-    from typing import Any
 
 
 def main() -> None:
-    uranium_isotopes: dict[Any, Any] = {
+    uranium_isotopes: dict[str, dict[str, str | float]] = {
         "Uranium 233": {
             "atomic_mass": "233.03963 u",
             "neutrons": 141,
@@ -45,8 +41,9 @@ def main() -> None:
         },
     }
 
-    with open(Path(__file__).parent.joinpath("uranium_isotopes.json"), "w",
-               encoding="ascii") as outfile:
+    with open(
+        Path(__file__).parent.joinpath("uranium_isotopes.json"), "w", encoding="ascii"
+    ) as outfile:
         json.dump(uranium_isotopes, outfile, indent=4)
 
 
