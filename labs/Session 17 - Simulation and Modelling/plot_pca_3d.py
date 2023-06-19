@@ -9,7 +9,7 @@ import typing
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.markers import MarkerStyle
-from scipy import stats
+from scipy import stats  # type: ignore
 from sklearn.decomposition import PCA
 
 if typing.TYPE_CHECKING:

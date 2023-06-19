@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """quadratic_regression_sklearn.py"""
 
-
 from __future__ import annotations
 
 import typing
@@ -14,6 +13,16 @@ from sklearn.preprocessing import PolynomialFeatures
 if typing.TYPE_CHECKING:
     from matplotlib.axes import Axes
     from numpy.typing import NDArray
+
+
+def fit_linear(
+    vec_x: NDArray[np.float_], vec_y: NDArray[np.float_]
+) -> tuple[float, float]:
+    vec_x = vec_x[:, np.newaxis]  # Make vec_x a "column" vector (now a 2D matrix)
+    model: LinearRegression = LinearRegression().fit(vec_x, vec_y)
+    m: float = float(model.coef_[0])
+    b: float = float(model.intercept_)  # type: ignore
+    return m, b
 
 
 def fit_quadratic(
@@ -30,16 +39,6 @@ def fit_quadratic(
     b: float = model.coef_[0]
     c = float(model.intercept_)  # type: ignore
     return a, b, c
-
-
-def fit_linear(
-    vec_x: NDArray[np.float_], vec_y: NDArray[np.float_]
-) -> tuple[float, float]:
-    vec_x = vec_x[:, np.newaxis]  # Make vec_x a "column" vector (now a 2D matrix)
-    model: LinearRegression = LinearRegression().fit(vec_x, vec_y)
-    m: float = float(model.coef_[0])
-    b: float = float(model.intercept_)  # type: ignore
-    return m, b
 
 
 def f(a: float, b: float, c: float, x: float) -> float:
