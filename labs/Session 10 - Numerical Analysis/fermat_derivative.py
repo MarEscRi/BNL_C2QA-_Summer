@@ -18,8 +18,16 @@ def f(x: NDArray[np.float_]) -> NDArray[np.float_]:
     return np.cos(x)
 
 
-def f_prime(x: NDArray[np.float_], h: float) -> NDArray[np.float_]:
+def f_prime_actual(x: NDArray[np.float_]) -> NDArray[np.float_]:
+    return -np.sin(x)
+
+
+def f_prime_fermat(x: NDArray[np.float_], h: float) -> NDArray[np.float_]:
     return (f(x + h) - f(x)) / h
+
+
+def f_prime_centered(x: NDArray[np.float_], h: float) -> NDArray[np.float_]:
+    return (f(x + h) - f(x - h)) / (2 * h)
 
 
 def plot(ax: Axes) -> None:
@@ -28,12 +36,17 @@ def plot(ax: Axes) -> None:
     n: int = 500
 
     x: NDArray[np.float_] = np.linspace(a, b, n, dtype=float)
-
     y: NDArray[np.float_] = f(x)
-    y_prime: NDArray[np.float_] = f_prime(x, (b - a) / n)
+
+    y_prime_actual: NDArray[np.float_] = f_prime_actual(x)
+    y_prime_fermat: NDArray[np.float_] = f_prime_fermat(x, (b - a) / n)
+    y_prime_centered: NDArray[np.float_] = f_prime_centered(x, (b - a) / n)
+
+    print(f"Fermat Error   : {sum((y_prime_actual-y_prime_fermat)**2):.14%}")
+    print(f"Centered Error : {sum((y_prime_actual-y_prime_centered)**2):.14%}")    
 
     ax.plot(x, y, label=r"$y=\cos{x}$")
-    ax.plot(x, y_prime, label=r"$\frac{dy}{dx}=-\sin{x}$")
+    ax.plot(x, y_prime_centered, label=r"$\frac{dy}{dx}=-\sin{x}$")
 
     ax.set_title("Fermat's Difference Quotient")
     ax.set_xlabel("x")
@@ -45,6 +58,8 @@ def plot(ax: Axes) -> None:
 
     ax.axhline(0, color="black", linestyle="-")
     ax.axvline(0, color="black", linestyle="-")
+
+
 
 
 def main() -> None:
