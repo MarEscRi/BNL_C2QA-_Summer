@@ -17,9 +17,9 @@ if typing.TYPE_CHECKING:
     from matplotlib.axes import Axes
     from numpy.typing import NDArray
 
-K_CLUSTERS: int = 3
-INCLUDE_OUTLIERS: bool = False
-MEAN_MULTIPLE: int = 0
+K_CLUSTERS: int = 2
+INCLUDE_OUTLIERS: bool = True
+MEAN_MULTIPLE: int = 1
 
 COLMAP: tuple[str, ...] = ("red", "blue", "green", "purple", "yellow", "orange")
 

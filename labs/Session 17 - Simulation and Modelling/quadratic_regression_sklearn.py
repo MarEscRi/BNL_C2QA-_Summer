@@ -29,8 +29,12 @@ def fit_quadratic(
     vec_x: NDArray[np.float_], vec_y: NDArray[np.float_]
 ) -> tuple[float, float, float]:
     vec_x = vec_x[:, np.newaxis]  # Make vec_x a "column" vector (now a 2D matrix)
+
+    # these two lines are used to protect againts round off error since the dif between 
+    # x and y is great. degree is the poly youre trying to fit to 
     transformer = PolynomialFeatures(degree=2, include_bias=False)
     transformer.fit(vec_x)
+
     # The matrix vec_x2 has two columns: the original x values and now x**2 values
     vec_x2: NDArray[np.float_] = np.array(transformer.transform(vec_x))  # type: ignore
     lr = LinearRegression()

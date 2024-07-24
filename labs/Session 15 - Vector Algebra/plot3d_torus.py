@@ -38,8 +38,8 @@ def plot(ax: Axes) -> None:
     ax.set_zlim(-radius_toroidal, radius_toroidal)  # type: ignore
 
     # TODO: Uncomment the following lines one-by-one
-    ax.scatter(x, y, z)
-    # ax.plot_wireframe(x, y, z)  # type: ignore
+    # ax.scatter(x, y, z)
+    ax.plot_wireframe(x, y, z)  # type: ignore
     # ax.plot_surface(x, y, z)  # type: ignore
 
 

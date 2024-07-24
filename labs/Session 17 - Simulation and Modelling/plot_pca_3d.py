@@ -76,7 +76,7 @@ def main() -> None:
     y_pca_plane.shape = (2, 2)
     z_pca_plane.shape = (2, 2)
 
-    # ax.plot_surface(x_pca_plane, y_pca_plane, z_pca_plane) # type: ignore
+    ax.plot_surface(x_pca_plane, y_pca_plane, z_pca_plane) # type: ignore
 
     plt.show()
 

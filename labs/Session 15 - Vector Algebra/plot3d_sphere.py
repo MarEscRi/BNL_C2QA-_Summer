@@ -27,9 +27,9 @@ def plot(ax: Axes) -> None:
     ax.set_zlabel("z")  # type: ignore
 
     # TODO: Uncomment the following lines one-by-one
-    ax.scatter(x, y, z)
+    # ax.scatter(x, y, z)
     # ax.plot_wireframe(x, y, z)  # type: ignore
-    # ax.plot_surface(x, y, z)  # type: ignore
+    ax.plot_surface(x, y, z)  # type: ignore
 
 
 def main() -> None:
